@@ -3,16 +3,9 @@
 namespace App\Domains\Image\Jobs;
 
 use App\Models\Image;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
-class StoreNewImageJob implements ShouldQueue
+class StoreNewImageJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     private $data;
 
     /**

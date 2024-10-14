@@ -1,5 +1,7 @@
 # Image API
 
+The branch is master.
+
 ## Setup
 
 1. Install all dependencies `composer install`.
@@ -45,6 +47,8 @@ The logout is handled by the `LogoutJob` which revokes the user's current API to
 -   `image`: (file) Upload file.
 -   `title`: (string) Your image title.
 -   `description`: (string) The image's description.
+
+Create a symbolic link from storage/app/public, run `php artisan storage:link`
 
 Returns a JSON object with the image information (size, type, path, ...).
 Stored image to the /storage/app/public/images and added to the db.
