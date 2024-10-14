@@ -21,7 +21,7 @@ class AddUserValidator
     {
         $validator = Validator::make($input, $this->rules, $messages);
 
-        return (bool)$validator->validate();
+        return $validator;
     }
 }
 

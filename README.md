@@ -2,11 +2,11 @@
 
 ## Setup
 
-1. Configurated my MySQL database details in the `.env` file.
-2. Created migration to add `images` table.
+1. Install all dependencies `composer install`.
+2. Configurate MySQL database details in the `.env` file.
 3. Run `php artisan migrate` to set up the database tables.
-4. Installed Laravel Sanctum by running `composer require laravel/sanctum` for authentication with API tokens and migrated with `php artisan migrate`.
-5. Started the server using `php artisan serve`.
+4. Run `php artisan db:seed` to add default user.
+5. Starte the server using `php artisan serve`.
 
 Used Postman for checking all requests.
 

@@ -3,16 +3,10 @@
 namespace App\Domains\User\Jobs;
 
 use App\Domains\User\AddUserValidator;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Validation\ValidationException;
 
-class ValidateAddUserInputJob implements ShouldQueue
+class ValidateAddUserInputJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     protected $input;
 
     /**
@@ -32,6 +26,10 @@ class ValidateAddUserInputJob implements ShouldQueue
      */
     public function handle(AddUserValidator $validator)
     {
-        return $validator->validateInput($this->input);
+        $validation = $validator->validateInput($this->input);
+
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
     }
 }

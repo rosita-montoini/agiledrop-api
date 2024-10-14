@@ -7,6 +7,7 @@ use App\Domains\Auth\Jobs\LoginJob;
 use App\Domains\Auth\Jobs\LogoutJob;
 use App\Domains\User\Jobs\ValidateAddUserInputJob;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,13 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
-        (new ValidateAddUserInputJob($requestParams))->handle(new \App\Domains\User\AddUserValidator);
+        try {
+            (new ValidateAddUserInputJob($requestParams))->handle(new \App\Domains\User\AddUserValidator);
+            
+        } catch (ValidationException $e) {
+
+            return response()->json(['errors' => $e->errors()], 422);
+        }
 
         $loginResponse = (new LoginJob($requestParams['email'], $requestParams['password']))->handle();
 
